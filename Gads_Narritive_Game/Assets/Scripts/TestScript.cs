@@ -13,23 +13,37 @@ public class TestScript : MonoBehaviour
     private Story story;
     public TextMeshProUGUI textPrefab;
     public Button buttonPrefab;
-
-     // Start is called before the first frame update
+    public static TestScript testScript;
+    // Start is called before the first frame update
+    private IEnumerator timerCoroutine()
+    {
+       
+        yield return new WaitForEndOfFrame();  // Wait for the end of the frame to ensure UI update
+        eraseUI();
+    }
+    private void Awake()
+    {
+        testScript = this; 
+    }
     void Start()
     {
 
         story = new Story(inkJson.text);
-
+       BindExternalFunctions();
         refreshUI();
 
       
     }
     void refreshUI()
     {
-        eraseUI();  
+        Timer.timer.ResetTimer();  // This will call UpdateTimerImage internally
+         eraseUI();  
+
+
         TextMeshProUGUI storyText = Instantiate(textPrefab) as TextMeshProUGUI;
         storyText.text = loadStoryChunk();
         storyText.transform.SetParent(this.transform, false);
+
 
         foreach (Choice choice in story.currentChoices)
         {
@@ -41,28 +55,27 @@ public class TestScript : MonoBehaviour
             choiceButton.onClick.AddListener(delegate
             {
                 ChooseStoryChoice(choice);
+
+               
             });
 
         }
-        PlayerStats.playerStats.ChangeEngagement(10);
-        PlayerStats.playerStats.ChangeStress(10);
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    void eraseUI()
+    
+    public void eraseUI()
     {
         for(int i = 0; i< this.transform.childCount; i++)
         {
             Destroy(this.transform.GetChild(i).gameObject);
         }
 
+       
     }
     void ChooseStoryChoice(Choice choice)
     {
+       
         story.ChooseChoiceIndex(choice.index);
+        
         refreshUI();
     }
     string loadStoryChunk()
@@ -74,5 +87,37 @@ public class TestScript : MonoBehaviour
         }
 
         return text;
+    }
+
+    void BindExternalFunctions()
+    {
+        // Example: Bind functions to be called from Ink
+
+        story.BindExternalFunction("changeStress", (float amount) =>
+        {
+            PlayerStats.playerStats.ChangeStress(amount);
+            HandleChoiceValue(amount);
+        });
+
+        story.BindExternalFunction("changeEngagement", (float amount) =>
+        {
+            PlayerStats.playerStats.ChangeEngagement(amount);
+            HandleChoiceValue(amount);
+        });
+    }
+
+    void UnbindExternalFunctions()
+    {
+        story.UnbindExternalFunction("changeStress");
+        story.UnbindExternalFunction("changeEngagement");
+
+      
+
+    }
+    
+    void HandleChoiceValue(float value)
+    {
+        // Logic to handle the choice value
+        //Debug.Log("Choice Value: " + value);
     }
 }

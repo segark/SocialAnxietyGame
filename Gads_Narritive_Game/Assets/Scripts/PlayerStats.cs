@@ -35,6 +35,7 @@ public class PlayerStats : MonoBehaviour
     {
         engagementLevel += amount;
         engagementLevel = Mathf.Clamp(engagementLevel, 0f, 100f); // Assuming the max value is 100
+        
         engagementSlider.value = engagementLevel;
     }
 
@@ -52,6 +53,12 @@ public class PlayerStats : MonoBehaviour
 
        
 
+    }
+
+    public void UISlider()
+    {
+       
+       
     }
 
     // add code when reached max 

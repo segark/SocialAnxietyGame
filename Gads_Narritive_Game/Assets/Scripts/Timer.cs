@@ -1,42 +1,69 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    public Image timerImage;  
-    public float maxTime = 10f;  
+    public Image timerImage;  // The UI image that will visually represent the timer
+    public float totalTime = 10f;  // Total time for the countdown
 
-    private float currentTime;
-    public float whatever;
-    void Start()
+    private float remainingTime;
+    private bool isTimerRunning = false;
+    public static Timer timer;
+    private void Awake()
     {
-        
-        currentTime = maxTime;
-    
-        timerImage.fillAmount = 1f;
+        timer = this;
     }
-
+   
     void Update()
     {
-       
-        currentTime -= Time.deltaTime;
-
-     
-        currentTime = Mathf.Clamp(currentTime, 0f, maxTime);
-
-        timerImage.fillAmount = currentTime / maxTime;
-
-    
-        if (currentTime <= 0)
+        if (isTimerRunning)
         {
-            TimerFinished();
+            remainingTime -= Time.deltaTime;
+            if (remainingTime <= 0)
+            {
+                remainingTime = 0;
+                isTimerRunning = false;
+                // Timer has finished, add any additional logic here
+            }
+
+            UpdateTimerImage();
         }
     }
 
-    void TimerFinished()
+   
+    // Method to reset the timer
+    public void ResetTimer()
     {
-        // Handle what happens when the timer finishes
-        Debug.Log("Timer finished!");
-       
+        remainingTime = totalTime;
+        isTimerRunning = true;
+        UpdateTimerImage();
+        Debug.Log("Timer reset, time left: " + remainingTime);
     }
+
+    // Method to update the timer image based on remaining time
+    private void UpdateTimerImage()
+    {
+        if (timerImage != null)
+        {
+            timerImage.fillAmount = remainingTime / totalTime;
+          
+        }
+        else
+        {
+            
+        }
+    }
+
+    void TimerEnded()
+    {
+        // pop up bubble to shw=ow that timer is done
+    }
+
+    
+
+   
+
+  
+
 }
