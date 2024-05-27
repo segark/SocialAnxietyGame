@@ -10,6 +10,7 @@ public class Timer : MonoBehaviour
     private float remainingTime;
     private bool isTimerRunning = false;
     public static Timer timer;
+    public GameObject EndTimerPanel;
     private void Awake()
     {
         timer = this;
@@ -24,6 +25,11 @@ public class Timer : MonoBehaviour
             {
                 remainingTime = 0;
                 isTimerRunning = false;
+                if(remainingTime>=0) {
+                
+                    TimerEnded();
+
+                }
                 // Timer has finished, add any additional logic here
             }
 
@@ -51,10 +57,12 @@ public class Timer : MonoBehaviour
 
     void TimerEnded()
     {
+        
+        EndTimerPanel.SetActive(true);
         // pop up bubble to shw=ow that timer is done
     }
 
-    void LoadTimer()
+     public void LoadTimer()
     {
         timerImage = Instantiate(timerImage, this.transform) as Image;
     }

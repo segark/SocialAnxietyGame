@@ -41,7 +41,7 @@ public class DialogueTest : MonoBehaviour
     {
         BindExternalFunctions();
         refreshUI();
-
+       
     }
 
     string loadStoryChunkNew()
@@ -90,6 +90,7 @@ public class DialogueTest : MonoBehaviour
     }
     void refreshUI()
     {
+        Timer.timer.LoadTimer();
         Timer.timer.ResetTimer();  // This will call UpdateTimerImage internally
         //eraseUI();
 

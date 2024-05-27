@@ -13,7 +13,7 @@ EXTERNAL changeEngagement(engValue)
  ~changeEngagement(2)
    -> paragraph_two
 *[Nod silently] 
-~changeStress(2)
+~changeStress(12)
 ~changeEngagement(2) 
 -> paragraph_two
 ===paragraph_two== 
@@ -22,11 +22,11 @@ EXTERNAL changeEngagement(engValue)
 Thanks. I was getting worried about you. You've been holed up in your room for days. Is everything alright?
 
 *[Yeah, I'm fine. Just needed some time alone.]
-~changeStress(0)
+~changeStress(10)
 ~changeEngagement(2)
 -> paragraph_three
 *[Not really, I've been feeling overwhelmed.]
-~changeStress(2)
+~changeStress(10)
 ~changeEngagement(2) 
 -> paragraph_three
 *[I don't know, it's been hard.]
@@ -39,7 +39,7 @@ Thanks. I was getting worried about you. You've been holed up in your room for d
 //~  interestChoice =0 
 I understand needing some alone time, but isolating yourself can make things worse. Have you talked to anyone about how you're feeling?"
 * [Just you, really.You're the only one I feel comfortable with.]
-~changeStress(0)
+~changeStress(10)
 ~changeEngagement(2)
 -> paragraph_four
 *[Mostly just strangers online.It's easier than face-to-face conversations.] 

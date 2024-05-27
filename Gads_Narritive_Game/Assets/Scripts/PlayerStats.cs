@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class PlayerStats : MonoBehaviour
     private Slider stressSlider;
     private Slider engagementSlider;
     public Transform uiCanvas;
+    public List<Transform> sliderTransforms;  // List of predefined transforms
 
     public static PlayerStats playerStats;
     private void Start()
@@ -42,14 +44,23 @@ public class PlayerStats : MonoBehaviour
     public void loadSliders()
     {
         stressSlider = Instantiate(stressMeter, this.transform) as Slider;
+
+
+       
+
+
         engagementSlider = Instantiate(engagementMeter,this.transform) as Slider;
+
+        
+
+
 
         stressSlider.maxValue = 100f;
         engagementSlider.maxValue = 100f;
 
         stressSlider.minValue = 0f;
         stressSlider.minValue = 0f;
-        Debug.Log("mters loaded");
+       // Debug.Log("mters loaded");
 
        
 
