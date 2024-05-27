@@ -15,15 +15,20 @@ public class DialogueTest : MonoBehaviour
     public Button buttonFour;
     public List<Transform> buttonTransforms;  // List of predefined transforms
     public List<Vector3> buttonPositions;  // List of predefined transforms
-
+    public Button buttonToHide;
+    public GameObject panelToShow;
 
     // Start is called before the first frame update
     void Start()
     {
         story= new Story(inkJsonNew.text);
 
+        panelToShow.SetActive(false);
+        textNew.gameObject.SetActive(false);
 
-       
+        // Add listener to the button
+        buttonToHide.onClick.AddListener(OnButtonClicked);
+
     }
     // Update is called once per frame
     void Update()
@@ -85,10 +90,10 @@ public class DialogueTest : MonoBehaviour
     }
     void refreshUI()
     {
-        //Timer.timer.ResetTimer();  // This will call UpdateTimerImage internally
-       //eraseUI();
+        Timer.timer.ResetTimer();  // This will call UpdateTimerImage internally
+        //eraseUI();
 
-
+        textNew.gameObject.SetActive(true);
         textNew.text = loadStoryChunkNew();
         // textNew.transform.SetParent(this.transform, false);
 
@@ -155,5 +160,17 @@ public class DialogueTest : MonoBehaviour
         }
     }
 
- 
+
+    void OnButtonClicked()
+    {
+        // Hide the button
+        buttonToHide.gameObject.SetActive(false);
+
+        // Show the panel and text
+        panelToShow.SetActive(true);
+      
+        PlayerStats.playerStats.loadSliders();
+        // Optionally set text content
+        //textToShow.text = "Your desired text goes here.";
+    }
 }

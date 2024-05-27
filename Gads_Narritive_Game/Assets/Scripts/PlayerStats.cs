@@ -22,7 +22,7 @@ public class PlayerStats : MonoBehaviour
     private void Awake()
     {
         playerStats = this;
-        loadSliders();
+       // loadSliders();
     }
     public void ChangeStress(float amount)
     {
@@ -41,8 +41,8 @@ public class PlayerStats : MonoBehaviour
 
     public void loadSliders()
     {
-        stressSlider = Instantiate(stressMeter,this.transform) as Slider;
-         engagementSlider = Instantiate(engagementMeter,this.transform) as Slider;
+        stressSlider = Instantiate(stressMeter, this.transform) as Slider;
+        engagementSlider = Instantiate(engagementMeter,this.transform) as Slider;
 
         stressSlider.maxValue = 100f;
         engagementSlider.maxValue = 100f;

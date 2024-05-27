@@ -35,6 +35,7 @@ public class Timer : MonoBehaviour
     // Method to reset the timer
     public void ResetTimer()
     {
+        LoadTimer();
         remainingTime = totalTime;
         isTimerRunning = true;
         UpdateTimerImage();
@@ -53,7 +54,10 @@ public class Timer : MonoBehaviour
         // pop up bubble to shw=ow that timer is done
     }
 
-    
+    void LoadTimer()
+    {
+        timerImage = Instantiate(timerImage, this.transform) as Image;
+    }
 
    
 
