@@ -11,4 +11,19 @@ public class RestartLevel : MonoBehaviour
         // Load the current scene again
         SceneManager.LoadScene(currentScene.name);
     }
+
+    public void LoadPlayerOneScene()
+    {
+       // SceneManager.LoadScene(currentScene.name);
+    }
+
+    public void LoadPlayerTwoScene()
+    {
+        //SceneManager.LoadScene(currentScene.name);
+    }
+
+    public void LoadPlayerThreeScene()
+    {
+       // SceneManager.LoadScene(currentScene.name);
+    }
 }
