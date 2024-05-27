@@ -44,15 +44,8 @@ public class Timer : MonoBehaviour
     // Method to update the timer image based on remaining time
     private void UpdateTimerImage()
     {
-        if (timerImage != null)
-        {
             timerImage.fillAmount = remainingTime / totalTime;
           
-        }
-        else
-        {
-            
-        }
     }
 
     void TimerEnded()
