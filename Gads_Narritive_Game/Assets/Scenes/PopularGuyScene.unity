@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 200227825}
   - component: {fileID: 200227824}
   - component: {fileID: 200227823}
-  - component: {fileID: 200227822}
+  - component: {fileID: 200227828}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -144,28 +144,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &200227822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 200227821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a77a560d360ad04aa0ef1fd11566edb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inkJsonCG: {fileID: 4900000, guid: dacc1b44990799243942cf78315cd459, type: 3}
-  textCG: {fileID: 1822371618}
-  buttonSG: {fileID: 4354850084297683779, guid: 6e58ea9e21460c540a43b8cfc5d2f41e, type: 3}
-  buttonTransformsCG:
-  - {fileID: 1632389573}
-  - {fileID: 328083468}
-  - {fileID: 1265811543}
-  buttonPositionsCG: []
-  buttonToHideCG: {fileID: 1235568390}
-  panelToShowCG: {fileID: 1182360808}
 --- !u!114 &200227823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,6 +252,28 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &200227828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200227821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e3747a9568bc7489debb250824c340, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inkJsonPG: {fileID: 4900000, guid: 0af685e378f66684a9577394134772c3, type: 3}
+  textPG: {fileID: 1822371618}
+  buttonSG: {fileID: 4354850084297683779, guid: 6e58ea9e21460c540a43b8cfc5d2f41e, type: 3}
+  buttonTransformsPG:
+  - {fileID: 1632389573}
+  - {fileID: 328083468}
+  - {fileID: 1265811543}
+  buttonPositionsPG: []
+  buttonToHidePG: {fileID: 1235568390}
+  panelToShowPG: {fileID: 1701481641}
 --- !u!1001 &244347611
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -882,8 +882,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 200227822}
-        m_TargetAssemblyTypeName: CharacterTwo, Assembly-CSharp
+      - m_Target: {fileID: 200227828}
+        m_TargetAssemblyTypeName: CharacterThree, Assembly-CSharp
         m_MethodName: StartDialogue
         m_Mode: 1
         m_Arguments:
