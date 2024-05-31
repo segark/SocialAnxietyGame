@@ -138,15 +138,15 @@ You're doing just fine. And hey, if you ever need someone to talk to or just han
 *[ "I'd like that. Thanks, Kai."] 
 ~changeStress(10)
 ~changeEngagement(2)
--> CG_Eight
+-> CG_Nine
 *["Yeah, that would be nice." ]
 ~changeStress(10)
 ~changeEngagement(2)
-->CG_Eight
+->CG_Nine
 *[Smile and nod appreciatively ]
 ~changeStress(10)
 ~changeEngagement(2)
--> CG_Eight
+-> CG_Nine
 
 ===CG_Nine===
 "Great! Let's enjoy the rest of the party and catch up some more. It's really good to see you again, [Player Name]."

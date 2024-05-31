@@ -45,7 +45,7 @@ public class Timer : MonoBehaviour
         remainingTime = totalTime;
         isTimerRunning = true;
         UpdateTimerImage();
-        Debug.Log("Timer reset, time left: " + remainingTime);
+      //  Debug.Log("Timer reset, time left: " + remainingTime);
     }
 
     // Method to update the timer image based on remaining time

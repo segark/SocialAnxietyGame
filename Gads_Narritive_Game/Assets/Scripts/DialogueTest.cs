@@ -17,6 +17,8 @@ public class DialogueTest : MonoBehaviour
     public List<Vector3> buttonPositions;  // List of predefined transforms
     public Button buttonToHide;
     public GameObject panelToShow;
+    public Button buttonQuitNew;
+    private string buttonName = "Button(Clone)";
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,7 @@ public class DialogueTest : MonoBehaviour
 
         panelToShow.SetActive(false);
         textNew.gameObject.SetActive(false);
+        buttonQuitNew.gameObject.SetActive(false);
 
         // Add listener to the button
         buttonToHide.onClick.AddListener(OnButtonClicked);
@@ -90,50 +93,85 @@ public class DialogueTest : MonoBehaviour
     }
     void refreshUI()
     {
-        Timer.timer.LoadTimer();
-        Timer.timer.ResetTimer();  // This will call UpdateTimerImage internally
-        //eraseUI();
+        //Timer.timer.LoadTimer();
+       // Timer.timer.ResetTimer();  // This will call UpdateTimerImage internally
+
 
         textNew.gameObject.SetActive(true);
         textNew.text = loadStoryChunkNew();
-        // textNew.transform.SetParent(this.transform, false);
 
 
-
-        // TextMeshProUGUI choiceTextTwo = buttonTwo.GetComponentInChildren<TextMeshProUGUI>();
-        //TextMeshProUGUI choiceTextThree = buttonThree.GetComponentInChildren<TextMeshProUGUI>();
-
-     
-
-        for(int j =0; j< story.currentChoices.Count; j++)
+        if (story.currentChoices.Count > 0)
         {
-            // Choice choiceOne;
-            //i++;
-            List<Ink.Runtime.Choice> choices = story.currentChoices;
-            Button choiceButton = Instantiate(buttonFour) as Button;
-            TextMeshProUGUI choiceText = buttonFour.GetComponentInChildren<TextMeshProUGUI>();
-            choiceText.text = story.currentChoices[j].text;
-            //choiceButton.transform.localPosition = buttonPositions[i];  // Set the specific position
-            choiceButton.transform.SetParent(this.transform, false);
 
-            choiceButton.transform.position = buttonTransforms[j].position;  // Set the position from the transform
-            choiceButton.transform.rotation = buttonTransforms[j].rotation;  // Optionally set the rotation
-            choiceButton.transform.localScale = buttonTransforms[j].localScale;
-
-            choiceButton.transform.SetParent(this.transform, false);
-            int choiceIndex = j;  // Capture the current index in the loop for the delegate
-            choiceButton.onClick.AddListener(delegate
+            for (int j = 0; j < story.currentChoices.Count; j++)
             {
-                ChooseStoryChoice(choices[choiceIndex]);
-            });
+
+                List<Ink.Runtime.Choice> choices = story.currentChoices;
+                Button choiceButton = Instantiate(buttonFour) as Button;
+                TextMeshProUGUI choiceText = buttonFour.GetComponentInChildren<TextMeshProUGUI>();
+                choiceText.text = story.currentChoices[j].text;
+                //choiceButton.transform.localPosition = buttonPositions[i];  // Set the specific position
+                choiceButton.transform.SetParent(this.transform, false);
+
+                choiceButton.transform.position = buttonTransforms[j].position;  // Set the position from the transform
+                choiceButton.transform.rotation = buttonTransforms[j].rotation;  // Optionally set the rotation
+                choiceButton.transform.localScale = buttonTransforms[j].localScale;
+
+                choiceButton.transform.SetParent(this.transform, false);
+                // createdButtons.Add(choiceButton);
+                int choiceIndex = j;  // Capture the current index in the loop for the delegate
+                choiceButton.onClick.AddListener(delegate
+                {
+                    ChooseStoryChoice(choices[choiceIndex]);
+                });
+
+            }
+
+
+        }
+        else
+        {
+            OnDialogueFinished();
         }
 
-       /* foreach (Choice choice in story.currentChoices)
-        {
-            int i = 0;
-            
 
-        } */ 
+    }
+
+    void OnDialogueFinished()
+    {
+
+        List<GameObject> buttonsToDestroy = new List<GameObject>();
+
+        // Iterate through all child objects
+        foreach (Transform child in transform)
+        {
+            // Check if the child is a Button and its name matches the specified name
+            if (child.gameObject.name == buttonName && child.GetComponent<Button>() != null)
+            {
+                // Add the button to the list of objects to be destroyed
+                buttonsToDestroy.Add(child.gameObject);
+            }
+        }
+
+        // Destroy all button objects in the list
+        foreach (GameObject button in buttonsToDestroy)
+        {
+            Destroy(button);
+            //  Debug.Log("Destroyed button: " + buttonName);
+        }
+
+        // Check if no button objects were found
+        if (buttonsToDestroy.Count == 0)
+        {
+            Debug.LogWarning("No buttons with name " + buttonName + " found.");
+        }
+
+        panelToShow.SetActive(false);
+        //textCG.gameObject.SetActive(false);
+        buttonQuitNew.gameObject.SetActive(true);
+        Debug.Log("Dialogue finished.");
+        // For example, load another scene or show a "Quit Dialogue" button
     }
 
     public void UpdateButtons(List<Ink.Runtime.Choice> choices)

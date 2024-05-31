@@ -16,8 +16,9 @@ public class CharacterTwo : MonoBehaviour
     public List<Transform> buttonTransformsCG;  // List of predefined transforms
     public List<Vector3> buttonPositionsCG;  // List of predefined transforms
     public Button buttonToHideCG;
+    public Button buttonQuitCG;
     public GameObject panelToShowCG;
-
+    private string buttonName= "Button(Clone)";
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +26,7 @@ public class CharacterTwo : MonoBehaviour
 
         panelToShowCG.SetActive(false);
         textCG.gameObject.SetActive(false);
-
+        buttonQuitCG.gameObject.SetActive(false);
         // Add listener to the button
         buttonToHideCG.onClick.AddListener(OnButtonClicked);
 
@@ -47,11 +48,13 @@ public class CharacterTwo : MonoBehaviour
     string loadStoryChunkNew()
     {
         string text = "";
-        if (story.canContinue) // bool to check if you can continue
+       
+        if (story.canContinue)
         {
             text = story.ContinueMaximally(); // continue everything
         }
-
+        
+       
         return text;
     }
 
@@ -92,75 +95,87 @@ public class CharacterTwo : MonoBehaviour
     {
         Timer.timer.LoadTimer();
         Timer.timer.ResetTimer();  // This will call UpdateTimerImage internally
-        //eraseUI();
+
 
         textCG.gameObject.SetActive(true);
         textCG.text = loadStoryChunkNew();
-        // textNew.transform.SetParent(this.transform, false);
+        
 
-
-
-        // TextMeshProUGUI choiceTextTwo = buttonTwo.GetComponentInChildren<TextMeshProUGUI>();
-        //TextMeshProUGUI choiceTextThree = buttonThree.GetComponentInChildren<TextMeshProUGUI>();
-
-
-
-        for (int j = 0; j < story.currentChoices.Count; j++)
-        {
-            // Choice choiceOne;
-            //i++;
-            List<Ink.Runtime.Choice> choices = story.currentChoices;
-            Button choiceButton = Instantiate(buttonSG) as Button;
-            TextMeshProUGUI choiceText = buttonSG.GetComponentInChildren<TextMeshProUGUI>();
-            choiceText.text = story.currentChoices[j].text;
-            //choiceButton.transform.localPosition = buttonPositions[i];  // Set the specific position
-            choiceButton.transform.SetParent(this.transform, false);
-
-            choiceButton.transform.position = buttonTransformsCG[j].position;  // Set the position from the transform
-            choiceButton.transform.rotation = buttonTransformsCG[j].rotation;  // Optionally set the rotation
-            choiceButton.transform.localScale = buttonTransformsCG[j].localScale;
-
-            choiceButton.transform.SetParent(this.transform, false);
-            int choiceIndex = j;  // Capture the current index in the loop for the delegate
-            choiceButton.onClick.AddListener(delegate
+            if (story.currentChoices.Count > 0)
             {
-                ChooseStoryChoice(choices[choiceIndex]);
-            });
-        }
 
-        /* foreach (Choice choice in story.currentChoices)
-         {
-             int i = 0;
+                for (int j=0; j < story.currentChoices.Count; j++)
+                {
 
+                    List<Ink.Runtime.Choice> choices = story.currentChoices;
+                    Button choiceButton = Instantiate(buttonSG) as Button;
+                    TextMeshProUGUI choiceText = buttonSG.GetComponentInChildren<TextMeshProUGUI>();
+                    choiceText.text = story.currentChoices[j].text;
+                    //choiceButton.transform.localPosition = buttonPositions[i];  // Set the specific position
+                    choiceButton.transform.SetParent(this.transform, false);
 
-         } */
-    }
+                    choiceButton.transform.position = buttonTransformsCG[j].position;  // Set the position from the transform
+                    choiceButton.transform.rotation = buttonTransformsCG[j].rotation;  // Optionally set the rotation
+                    choiceButton.transform.localScale = buttonTransformsCG[j].localScale;
 
-    public void UpdateButtons(List<Ink.Runtime.Choice> choices)
-    {
-        for (int i = 0; i < choices.Count; i++)
-        {
-            if (i >= buttonPositionsCG.Count)
+                    choiceButton.transform.SetParent(this.transform, false);
+                    // createdButtons.Add(choiceButton);
+                    int choiceIndex = j;  // Capture the current index in the loop for the delegate
+                    choiceButton.onClick.AddListener(delegate
+                    {
+                        ChooseStoryChoice(choices[choiceIndex]);
+                    });
+
+                }
+               
+
+            }
+            else
             {
-                Debug.LogWarning("Not enough predefined positions for the number of choices.");
-                break;
+                OnDialogueFinished();
             }
 
-            Button choiceButton = Instantiate(buttonSG);
-            //choiceButton.transform.SetParent(buttonParent, false);
-            choiceButton.transform.localPosition = buttonPositionsCG[i];  // Set the specific position
-
-            TextMeshProUGUI choiceText = choiceButton.GetComponentInChildren<TextMeshProUGUI>();
-            choiceText.text = choices[i].text;
-
-            int choiceIndex = i;  // Capture the current index in the loop for the delegate
-            choiceButton.onClick.AddListener(delegate
-            {
-                ChooseStoryChoice(choices[choiceIndex]);
-            });
-        }
+     
     }
 
+
+
+  
+    void OnDialogueFinished()
+    {
+
+        List<GameObject> buttonsToDestroy = new List<GameObject>();
+
+        // Iterate through all child objects
+        foreach (Transform child in transform)
+        {
+            // Check if the child is a Button and its name matches the specified name
+            if (child.gameObject.name == buttonName && child.GetComponent<Button>() != null)
+            {
+                // Add the button to the list of objects to be destroyed
+                buttonsToDestroy.Add(child.gameObject);
+            }
+        }
+
+        // Destroy all button objects in the list
+        foreach (GameObject button in buttonsToDestroy)
+        {
+            Destroy(button);
+          //  Debug.Log("Destroyed button: " + buttonName);
+        }
+
+        // Check if no button objects were found
+        if (buttonsToDestroy.Count == 0)
+        {
+            Debug.LogWarning("No buttons with name " + buttonName + " found.");
+        }
+
+        panelToShowCG.SetActive(false);
+        //textCG.gameObject.SetActive(false);
+        buttonQuitCG.gameObject.SetActive(true);
+        Debug.Log("Dialogue finished.");
+        // For example, load another scene or show a "Quit Dialogue" button
+    }
 
     void OnButtonClicked()
     {

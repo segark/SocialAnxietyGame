@@ -12,18 +12,35 @@ public class RestartLevel : MonoBehaviour
         SceneManager.LoadScene(currentScene.name);
     }
 
+    public void LoadCafeScene()
+    {
+         SceneManager.LoadScene("TestScene");
+    }
+    public void LoadPartyScene()
+    {
+        SceneManager.LoadScene("PartyScene");
+    }
     public void LoadPlayerOneScene()
     {
-       // SceneManager.LoadScene(currentScene.name);
+       SceneManager.LoadScene("ShyGirlScene");
     }
 
     public void LoadPlayerTwoScene()
     {
-        //SceneManager.LoadScene(currentScene.name);
+       SceneManager.LoadScene("ChillGuyScene");
     }
 
     public void LoadPlayerThreeScene()
     {
-       // SceneManager.LoadScene(currentScene.name);
+       SceneManager.LoadScene("PopularGuyScene");
+    }
+    public void LoadTutorialScene()
+    {
+        SceneManager.LoadScene("Tutorial");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

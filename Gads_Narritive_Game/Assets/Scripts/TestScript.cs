@@ -28,7 +28,7 @@ public class TestScript : MonoBehaviour
     }
     void refreshUI()
     {
-        Timer.timer.ResetTimer();  // This will call UpdateTimerImage internally
+        //Timer.timer.ResetTimer();  // This will call UpdateTimerImage internally
          eraseUI();  
 
 
