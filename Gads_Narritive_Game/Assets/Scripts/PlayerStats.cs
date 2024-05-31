@@ -21,6 +21,7 @@ public class PlayerStats : MonoBehaviour
 
     public static event Action<float> OnStressLevelChanged;
     public static event Action<float> OnEngLevelChanged;
+    public GameObject fullStressPanel;
     private void Start()
     {
       
@@ -33,10 +34,14 @@ public class PlayerStats : MonoBehaviour
     public void ChangeStress(float amount)
     {
         stressLevel += amount;
-       stressLevel = Mathf.Clamp(stressLevel, 0f, 100f); // Assuming the max value is 100
+        stressLevel = Mathf.Clamp(stressLevel, 0f, 100f); // Assuming the max value is 100
         stressSlider.value = stressLevel;
         OnStressLevelChanged?.Invoke(stressLevel);
-        
+
+        if (stressLevel >= 100f)
+        {
+            DisplayFullStressPanel();
+        }
     }
 
     public void ChangeEngagement(float amount)
@@ -72,7 +77,17 @@ public class PlayerStats : MonoBehaviour
        
 
     }
-
+    private void DisplayFullStressPanel()
+    {
+        if (fullStressPanel != null)
+        {
+            fullStressPanel.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("Full stress panel reference is not assigned.");
+        }
+    }
     public void UISlider()
     {
        
