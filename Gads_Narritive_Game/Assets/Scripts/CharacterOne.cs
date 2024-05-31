@@ -38,7 +38,7 @@ public class CharacterOne : MonoBehaviour
     }
 
 
-    public void StartDialogue()
+    public void StartDialogueSG()
     {
         BindExternalFunctions();
         refreshUI();
@@ -91,9 +91,11 @@ public class CharacterOne : MonoBehaviour
     }
     void refreshUI()
     {
-        Timer.timer.LoadTimer();
-        Timer.timer.ResetTimer();  // This will call UpdateTimerImage internally
+        //  Timer.timer.LoadTimer();
+        // Timer.timer.ResetTimer();  // This will call UpdateTimerImage internally
 
+        Timer.timer.LoadTimer();
+        Timer.timer.ResetTimer();
 
         textSG.gameObject.SetActive(true);
         textSG.text = loadStoryChunkNew();
@@ -168,10 +170,11 @@ public class CharacterOne : MonoBehaviour
             Debug.LogWarning("No buttons with name " + buttonName + " found.");
         }
 
-        panelToShowSG.SetActive(false);
+      //  panelToShowSG.SetActive(false);
         //textCG.gameObject.SetActive(false);
         buttonQuitSG.gameObject.SetActive(true);
         Debug.Log("Dialogue finished.");
+        Timer.timer.StopTimer();
         // For example, load another scene or show a "Quit Dialogue" button
     }
 

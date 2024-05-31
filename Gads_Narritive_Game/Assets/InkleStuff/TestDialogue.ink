@@ -6,81 +6,118 @@ EXTERNAL changeEngagement(engValue)
 
 *[Sure, Alice. Have a seat.] 
 ~changeStress(50)
-~changeEngagement(2)
+~changeEngagement(10)
  -> paragraph_two 
 *[I guess it's fine.]
-~changeStress(4)
- ~changeEngagement(2)
+~changeStress(50)
+ ~changeEngagement(10)
    -> paragraph_two
-*[Nod silently] 
-~changeStress(12)
-~changeEngagement(2) 
+*[Nod silently.] 
+~changeStress(80)
+~changeEngagement(10) 
 -> paragraph_two
 ===paragraph_two== 
 
 
-Thanks. I was getting worried about you. You've been holed up in your room for days. Is everything alright?
+Thanks. You know honestly, I was starting to get concerned about you. You've been cooped up in your room for days. Is everything okay?
 
 *[Yeah, I'm fine. Just needed some time alone.]
-~changeStress(10)
-~changeEngagement(2)
+~changeStress(0)
+~changeEngagement(-5)
 -> paragraph_three
 *[Not really, I've been feeling overwhelmed.]
-~changeStress(10)
-~changeEngagement(2) 
+~changeStress(25)
+~changeEngagement(-5) 
 -> paragraph_three
 *[I don't know, it's been hard.]
-~changeStress(1)
-~changeEngagement(2)
+~changeStress(10)
+~changeEngagement(-5)
 -> paragraph_three
 
 ===paragraph_three===
 
-//~  interestChoice =0 
-I understand needing some alone time, but isolating yourself can make things worse. Have you talked to anyone about how you're feeling?"
-* [Just you, really.You're the only one I feel comfortable with.]
+I understand needing some alone time, but isolating yourself can make things worse. Have you talked to anyone about how you're feeling?" 
+* [Not really I dont know who to talk to] 
 ~changeStress(10)
-~changeEngagement(2)
+~changeEngagement(5)
 -> paragraph_four
-*[Mostly just strangers online.It's easier than face-to-face conversations.] 
-~changeStress(0)
-~changeEngagement(2)
+*[I've chatted a bit online, but I feel like it's not the same.] 
+~changeStress(10)
+~changeEngagement(5)
 -> paragraph_four
-*[I haven't talked to anyone. I've been keeping to myself."] ->paragraph_four
+*[No, I haven't felt like talking to anyone.] ->paragraph_four
 ~changeStress(0)
-~changeEngagement(2)
-===paragraph_four===
-I appreciate you saying that. It means a lot. Have you considered talking to a professional? It might help to get some perspective from someone who's trained to help."
+~changeEngagement(5)
 
-*[I haven't thought about it, but maybe it's a good idea]
+
+===paragraph_four===
+It can be tough to open up about certain things. Just know that I'm here for you whenever you're ready to talk. We all need someone to lend an ear. Have you had any good conversations with anyone lately?”
+
+*[Honestly just you. You're the only one I feel comfortable with.]
 ~changeStress(0)
-~changeEngagement(2)
+~changeEngagement(-5)
 -> paragraph_five
-*[I'm not sure. Talking to strangers about my feelings sounds scary."] 
+*[Mostly just strangers online. It's easier than face-to-face conversations.] 
 ~changeStress(0)
-~changeEngagement(2)
+~changeEngagement(-5)
 -> paragraph_five
-*[I don't think that's for me. I'd rather try to handle it on my own]
+*[I haven't talked to anyone. I've been keeping to myself.]
 ~changeStress(0)
-~changeEngagement(2)
+~changeEngagement(-5)
 ->paragraph_five 
+
+
 ===paragraph_five===
-I understand. It's a big step, and it can be intimidating. But you're not alone in this. Small steps, like coming out for coffee, can make a difference. How about we do this more often?
-* [Thanks, Alice. I appreciate it.]
+I appreciate your trust and what you've shared with me. It means a lot. Have you ever thought about reaching out to a professional? Sometimes getting a different perspective from someone who's trained to help can make a huge difference.
+* [I haven't thought about it, but maybe it's a good idea.]
 ~changeStress(0)
-~changeEngagement(2)
+~changeEngagement(60)
 ->paragraph_six
-*[Okay. Thanks for being here.]
-~changeStress(0)
-~changeEngagement(2)
+*[I'm not sure, sounds daunting. Can I think about it?]
+~changeStress(10)
+~changeEngagement(60)
 ->paragraph_six
-*[Smile and nod appreciatively]
+*[I don't think that's for me. I'd rather try to handle it on my own.]
 ~changeStress(0)
-~changeEngagement(2)
+~changeEngagement(60)
 ->paragraph_six
 
 ===paragraph_six===
-Anytime, Let's grab our drinks and find a cozy spot to sit. It's nice to have some company.
+I understand. It's a big step, and it can be intimidating. But you're not alone in this. Taking small steps, like coming out for coffee, can make a difference. How about we do this more often?
+*[Yeah, I guess I'd like that.]
+~changeStress(10)
+~changeEngagement(-20)
+->Paragraph_Seven
+*[Maybe, I'll try get  out more.]
+~changeStress(10)
+~changeEngagement(-20)
+->Paragraph_Seven
+*[We'll see. I can't promise anything right now.]
+~changeStress(10)
+~changeEngagement(-20)
+->Paragraph_Seven
+
+
+
+===Paragraph_Seven===
+Okay, just take it one day at a time. And remember, I'm here whenever you need to talk or just hang out. We'll get through this together
+
+*[Thank you, I appreciate it.]
+~changeStress(10)
+~changeEngagement(20)
+->Paragraph_eight
+*[Thanks for being here.]
+~changeStress(10)
+~changeEngagement(20)
+->Paragraph_eight
+*[Smile and nod appreciatively.]
+~changeStress(10)
+~changeEngagement(20)
+->Paragraph_eight
+
+===Paragraph_eight===
+I'm here for you anytime. Let's grab our drinks and find a cosy spot to sit. It's nice to have some company.
+
 ->END
 
 

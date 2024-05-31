@@ -170,10 +170,11 @@ public class CharacterTwo : MonoBehaviour
             Debug.LogWarning("No buttons with name " + buttonName + " found.");
         }
 
-        panelToShowCG.SetActive(false);
+       // panelToShowCG.SetActive(false);
         //textCG.gameObject.SetActive(false);
         buttonQuitCG.gameObject.SetActive(true);
         Debug.Log("Dialogue finished.");
+        Timer.timer.StopTimer();
         // For example, load another scene or show a "Quit Dialogue" button
     }
 

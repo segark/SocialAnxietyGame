@@ -92,7 +92,7 @@ public class CharacterThree: MonoBehaviour
     void refreshUI()
     {
         Timer.timer.LoadTimer();
-        Timer.timer.ResetTimer();  // This will call UpdateTimerImage internally
+       Timer.timer.ResetTimer();  // This will call UpdateTimerImage internally
 
 
         textPG.gameObject.SetActive(true);
@@ -169,6 +169,8 @@ public class CharacterThree: MonoBehaviour
         //textCG.gameObject.SetActive(false);
         buttonQuitPG.gameObject.SetActive(true);
         Debug.Log("Dialogue finished.");
+
+        Timer.timer.StopTimer();
         // For example, load another scene or show a "Quit Dialogue" button
     }
 

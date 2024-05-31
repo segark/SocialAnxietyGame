@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -17,6 +18,9 @@ public class PlayerStats : MonoBehaviour
     public List<Transform> sliderTransforms;  // List of predefined transforms
 
     public static PlayerStats playerStats;
+
+    public static event Action<float> OnStressLevelChanged;
+    public static event Action<float> OnEngLevelChanged;
     private void Start()
     {
       
@@ -31,6 +35,8 @@ public class PlayerStats : MonoBehaviour
         stressLevel += amount;
        stressLevel = Mathf.Clamp(stressLevel, 0f, 100f); // Assuming the max value is 100
         stressSlider.value = stressLevel;
+        OnStressLevelChanged?.Invoke(stressLevel);
+        
     }
 
     public void ChangeEngagement(float amount)
@@ -39,6 +45,7 @@ public class PlayerStats : MonoBehaviour
         engagementLevel = Mathf.Clamp(engagementLevel, 0f, 100f); // Assuming the max value is 100
         
         engagementSlider.value = engagementLevel;
+        OnEngLevelChanged?.Invoke(engagementLevel);
     }
 
     public void loadSliders()

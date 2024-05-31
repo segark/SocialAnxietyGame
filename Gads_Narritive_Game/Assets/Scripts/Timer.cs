@@ -1,74 +1,96 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
+using System.Collections.Generic;
 
 public class Timer : MonoBehaviour
 {
-    public Image timerImage;  // The UI image that will visually represent the timer
-    public float totalTime = 10f;  // Total time for the countdown
-
-    private float remainingTime;
-    private bool isTimerRunning = false;
     public static Timer timer;
-    public GameObject EndTimerPanel;
+
+    public float timeLeft = 30f; // Set the timer duration
+    public TextMeshProUGUI timerText; // Reference to the TextMeshProUGUI component
+    public GameObject endPanel; // Reference to the panel to display when the timer ends
+
+    private bool isTimerRunning = false;
+    
+
     private void Awake()
     {
-        timer = this;
+        // Singleton pattern to ensure only one instance of Timer exists
+      
+            timer = this;
+           // DontDestroyOnLoad(gameObject);
+       
     }
-   
-    void Update()
+
+    private void Start()
+    {
+       // ResetTimer();
+    }
+
+    private void Update()
     {
         if (isTimerRunning)
         {
-            remainingTime -= Time.deltaTime;
-            if (remainingTime <= 0)
-            {
-                remainingTime = 0;
-                isTimerRunning = false;
-                if(remainingTime>=0) {
-                
-                    TimerEnded();
+            timeLeft -= Time.deltaTime;
 
-                }
-                // Timer has finished, add any additional logic here
+            if (timeLeft <= 0)
+            {
+                timeLeft = 0;
+                isTimerRunning = false;
+                OnTimerEnd();
             }
 
-            UpdateTimerImage();
+            UpdateTimerText();
+        }
+        else
+        {
+            // Hide the text if the timer is not running
+            timerText.gameObject.SetActive(false);
         }
     }
 
-   
-    // Method to reset the timer
+    public void LoadTimer()
+    {
+        // Start or resume the timer
+        isTimerRunning = true;
+        timerText.gameObject.SetActive(true); // Show the text when the timer is running
+    }
+
     public void ResetTimer()
     {
-        LoadTimer();
-        remainingTime = totalTime;
+        // Reset the timer to the initial duration and update the text
+        timeLeft = 30f;
+        UpdateTimerText();
         isTimerRunning = true;
-        UpdateTimerImage();
-      //  Debug.Log("Timer reset, time left: " + remainingTime);
+        timerText.gameObject.SetActive(true); // Show the text when the timer is running
+        endPanel.SetActive(false); // Hide the end panel when the timer resets
     }
 
-    // Method to update the timer image based on remaining time
-    private void UpdateTimerImage()
+    public void StopTimer()
     {
-            timerImage.fillAmount = remainingTime / totalTime;
-          
+        // Stop the timer and hide the text
+        isTimerRunning = false;
+        timerText.gameObject.SetActive(false); // Hide the text when the timer stops
     }
 
-    void TimerEnded()
+    private void UpdateTimerText()
     {
-        
-        EndTimerPanel.SetActive(true);
-        // pop up bubble to shw=ow that timer is done
+        // Display the remaining time as text in the format "0:00"
+        int minutes = Mathf.FloorToInt(timeLeft / 60f);
+        int seconds = Mathf.FloorToInt(timeLeft % 60f);
+        timerText.text = string.Format("{0:0}:{1:00}", minutes, seconds);
     }
 
-     public void LoadTimer()
+    private void OnTimerEnd()
     {
-        timerImage = Instantiate(timerImage, this.transform) as Image;
-    }
+        // Handle what happens when the timer ends
+        Debug.Log("Timer ended.");
+        StopTimer(); // Optionally stop the timer and hide the text when it ends
+        endPanel.SetActive(true); // Show the end panel when the timer ends
+        // You can add more functionality here based on your game's requirements
 
-   
+
+    }
 
   
-
 }

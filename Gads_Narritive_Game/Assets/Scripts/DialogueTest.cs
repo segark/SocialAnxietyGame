@@ -93,8 +93,8 @@ public class DialogueTest : MonoBehaviour
     }
     void refreshUI()
     {
-        //Timer.timer.LoadTimer();
-       // Timer.timer.ResetTimer();  // This will call UpdateTimerImage internally
+        Timer.timer.LoadTimer();
+        Timer.timer.ResetTimer();  // This will call UpdateTimerImage internally
 
 
         textNew.gameObject.SetActive(true);
@@ -138,9 +138,9 @@ public class DialogueTest : MonoBehaviour
 
     }
 
-    void OnDialogueFinished()
+   public void OnDialogueFinished()
     {
-
+        
         List<GameObject> buttonsToDestroy = new List<GameObject>();
 
         // Iterate through all child objects
@@ -167,10 +167,12 @@ public class DialogueTest : MonoBehaviour
             Debug.LogWarning("No buttons with name " + buttonName + " found.");
         }
 
-        panelToShow.SetActive(false);
+        //panelToShow.SetActive(false);
         //textCG.gameObject.SetActive(false);
         buttonQuitNew.gameObject.SetActive(true);
         Debug.Log("Dialogue finished.");
+
+        Timer.timer.StopTimer();
         // For example, load another scene or show a "Quit Dialogue" button
     }
 
