@@ -19,6 +19,8 @@ public class DialogueTest : MonoBehaviour
     public GameObject panelToShow;
     public Button buttonQuitNew;
     private string buttonName = "Button(Clone)";
+    public AudioSource audioSource; // AudioSource component
+    public AudioClip choiceAudioClip; // AudioC
 
     // Start is called before the first frame update
     void Start()
@@ -39,14 +41,37 @@ public class DialogueTest : MonoBehaviour
 
     }
 
+    void BindExternalFunctions()
+    {
+        // Example: Bind functions to be called from Ink
 
-   public  void StartDialogue()
+        story.BindExternalFunction("changeStress", (float amount) =>
+        {
+            PlayerStats.playerStats.ChangeStress(amount);
+            //HandleChoiceValue(amount);
+        });
+
+        story.BindExternalFunction("changeEngagement", (float amount) =>
+        {
+            PlayerStats.playerStats.ChangeEngagement(amount);
+            //HandleChoiceValue(amount);
+        });
+    }
+    public  void StartDialogue()
     {
         BindExternalFunctions();
         refreshUI();
        
     }
+      void eraseUI()
+    {
+        for (int i = 0; i < this.transform.childCount; i++)
+        {
+            Destroy(this.transform.GetChild(i).gameObject);
+        }
 
+
+    }
     string loadStoryChunkNew()
     {
         string text = "";
@@ -66,36 +91,13 @@ public class DialogueTest : MonoBehaviour
         refreshUI();
     }
 
-    void eraseUI()
-    {
-        for (int i = 0; i < this.transform.childCount; i++)
-        {
-            Destroy(this.transform.GetChild(i).gameObject);
-        }
-
-
-    }
-    void BindExternalFunctions()
-    {
-        // Example: Bind functions to be called from Ink
-
-        story.BindExternalFunction("changeStress", (float amount) =>
-        {
-            PlayerStats.playerStats.ChangeStress(amount);
-            //HandleChoiceValue(amount);
-        });
-
-        story.BindExternalFunction("changeEngagement", (float amount) =>
-        {
-            PlayerStats.playerStats.ChangeEngagement(amount);
-            //HandleChoiceValue(amount);
-        });
-    }
+  
+  
     void refreshUI()
     {
         Timer.timer.LoadTimer();
         Timer.timer.ResetTimer();  // This will call UpdateTimerImage internally
-
+        Timer.timer.OnTimerReset += HandleTimerReset;
 
         textNew.gameObject.SetActive(true);
         textNew.text = loadStoryChunkNew();
@@ -117,10 +119,11 @@ public class DialogueTest : MonoBehaviour
                 choiceButton.transform.position = buttonTransforms[j].position;  // Set the position from the transform
                 choiceButton.transform.rotation = buttonTransforms[j].rotation;  // Optionally set the rotation
                 choiceButton.transform.localScale = buttonTransforms[j].localScale;
-
+                //Debug.Log("Choice index: " + j);
                 choiceButton.transform.SetParent(this.transform, false);
                 // createdButtons.Add(choiceButton);
                 int choiceIndex = j;  // Capture the current index in the loop for the delegate
+                   Debug.Log("Choice index: " + choiceIndex);
                 choiceButton.onClick.AddListener(delegate
                 {
                     ChooseStoryChoice(choices[choiceIndex]);
@@ -159,6 +162,10 @@ public class DialogueTest : MonoBehaviour
         {
             Destroy(button);
             //  Debug.Log("Destroyed button: " + buttonName);
+        }
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
         }
 
         // Check if no button objects were found
@@ -200,7 +207,15 @@ public class DialogueTest : MonoBehaviour
             });
         }
     }
-
+    void HandleTimerReset()
+    {
+        // Play or restart the audio clip
+        if (audioSource != null && choiceAudioClip != null)
+        {
+            audioSource.clip = choiceAudioClip;
+            audioSource.Play();
+        }
+    }
 
     void OnButtonClicked()
     {

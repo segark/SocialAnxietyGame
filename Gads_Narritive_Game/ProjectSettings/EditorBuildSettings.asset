@@ -20,13 +20,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ShyGirlScene.unity
     guid: cdc65fe1573c6f548ba9bfa58521dddd
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ChillGuyScene.unity
     guid: a4aa4ab4a204be44daf155b9c1e53fbf
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PopularGuyScene.unity
     guid: 82b7be9281deb2547a9dd507bcb6710f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}

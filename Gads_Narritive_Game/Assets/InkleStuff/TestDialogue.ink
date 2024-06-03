@@ -2,18 +2,20 @@ EXTERNAL changeStress ( stressValue)
 
 EXTERNAL changeEngagement(engValue)
 
+->paragraph_one
+===paragraph_one===
 "Hey, I'm glad you finally decided to come out. Mind if I join you?"
 
 *[Sure, Alice. Have a seat.] 
-~changeStress(50)
+~changeStress(5)
 ~changeEngagement(10)
  -> paragraph_two 
 *[I guess it's fine.]
-~changeStress(50)
+~changeStress(5)
  ~changeEngagement(10)
    -> paragraph_two
 *[Nod silently.] 
-~changeStress(80)
+~changeStress(8)
 ~changeEngagement(10) 
 -> paragraph_two
 ===paragraph_two== 

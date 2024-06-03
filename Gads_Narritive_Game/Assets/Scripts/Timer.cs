@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System;
 using System.Collections.Generic;
 
 public class Timer : MonoBehaviour
@@ -11,20 +12,20 @@ public class Timer : MonoBehaviour
     public GameObject endPanel; // Reference to the panel to display when the timer ends
 
     private bool isTimerRunning = false;
-    
 
+    public event Action OnTimerReset;
     private void Awake()
     {
         // Singleton pattern to ensure only one instance of Timer exists
-      
-            timer = this;
-           // DontDestroyOnLoad(gameObject);
-       
+
+        timer = this;
+        // DontDestroyOnLoad(gameObject);
+
     }
 
     private void Start()
     {
-       // ResetTimer();
+        // ResetTimer();
     }
 
     private void Update()
@@ -64,6 +65,7 @@ public class Timer : MonoBehaviour
         isTimerRunning = true;
         timerText.gameObject.SetActive(true); // Show the text when the timer is running
         endPanel.SetActive(false); // Hide the end panel when the timer resets
+        OnTimerReset?.Invoke();
     }
 
     public void StopTimer()
@@ -92,5 +94,5 @@ public class Timer : MonoBehaviour
 
     }
 
-  
+
 }

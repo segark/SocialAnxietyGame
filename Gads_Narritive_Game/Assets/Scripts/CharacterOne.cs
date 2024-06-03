@@ -19,6 +19,8 @@ public class CharacterOne : MonoBehaviour
     public GameObject panelToShowSG;
     public Button buttonQuitSG;
     private string buttonName = "Button(Clone)";
+    public AudioSource audioSource; // AudioSource component
+    public AudioClip choiceAudioClip; // AudioC
     // Start is called before the first frame update
     void Start()
     {
@@ -96,7 +98,7 @@ public class CharacterOne : MonoBehaviour
 
         Timer.timer.LoadTimer();
         Timer.timer.ResetTimer();
-
+        Timer.timer.OnTimerReset += HandleTimerReset;
         textSG.gameObject.SetActive(true);
         textSG.text = loadStoryChunkNew();
 
@@ -163,7 +165,10 @@ public class CharacterOne : MonoBehaviour
             Destroy(button);
             //  Debug.Log("Destroyed button: " + buttonName);
         }
-
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
         // Check if no button objects were found
         if (buttonsToDestroy.Count == 0)
         {
@@ -203,6 +208,15 @@ public class CharacterOne : MonoBehaviour
         }
     }
 
+    void HandleTimerReset()
+    {
+        // Play or restart the audio clip
+        if (audioSource != null && choiceAudioClip != null)
+        {
+            audioSource.clip = choiceAudioClip;
+            audioSource.Play();
+        }
+    }
 
     void OnButtonClicked()
     {

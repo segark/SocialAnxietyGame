@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: I haven't talked to anyone. I've been keeping to myself.
+  m_text: Nod silently.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9ad4510722089b441a7ff42a1ace57ab, type: 2}
   m_sharedMaterial: {fileID: -8346512590059887327, guid: 9ad4510722089b441a7ff42a1ace57ab, type: 2}
@@ -254,4 +254,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3319588109939944641}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
