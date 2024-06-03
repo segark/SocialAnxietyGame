@@ -19,6 +19,8 @@ public class CharacterTwo : MonoBehaviour
     public Button buttonQuitCG;
     public GameObject panelToShowCG;
     private string buttonName= "Button(Clone)";
+    public AudioSource audioSource; // AudioSource component
+    public AudioClip choiceAudioClip; // AudioC
     // Start is called before the first frame update
     void Start()
     {
@@ -96,7 +98,7 @@ public class CharacterTwo : MonoBehaviour
         Timer.timer.LoadTimer();
         Timer.timer.ResetTimer();  // This will call UpdateTimerImage internally
 
-
+        Timer.timer.OnTimerReset += HandleTimerReset;
         textCG.gameObject.SetActive(true);
         textCG.text = loadStoryChunkNew();
         
@@ -189,5 +191,15 @@ public class CharacterTwo : MonoBehaviour
         PlayerStats.playerStats.loadSliders();
         // Optionally set text content
         //textToShow.text = "Your desired text goes here.";
+    }
+
+    void HandleTimerReset()
+    {
+        // Play or restart the audio clip
+        if (audioSource != null && choiceAudioClip != null)
+        {
+            audioSource.clip = choiceAudioClip;
+            audioSource.Play();
+        }
     }
 }
