@@ -78,9 +78,8 @@ public class Timer : MonoBehaviour
     private void UpdateTimerText()
     {
         // Display the remaining time as text in the format "0:00"
-        int minutes = Mathf.FloorToInt(timeLeft / 60f);
         int seconds = Mathf.FloorToInt(timeLeft % 60f);
-        timerText.text = string.Format("{0:0}:{1:00}", minutes, seconds);
+        timerText.text = string.Format("{0:00}", seconds);
     }
 
     private void OnTimerEnd()

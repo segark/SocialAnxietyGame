@@ -589,9 +589,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   engImage: {fileID: 459232784}
   engSprites:
-  - {fileID: 21300000, guid: f0e853e2a8d0a2041a6008a7d96fbb4b, type: 3}
-  - {fileID: 21300000, guid: e9b33023caf992c469303e08cf10b21a, type: 3}
-  - {fileID: 21300000, guid: 01ad6cc36fdf63a4896ad05ca7f57243, type: 3}
+  - {fileID: 21300000, guid: 30096e6f7942432469355f22df295eed, type: 3}
+  - {fileID: 21300000, guid: 15be3fc4f9f6801408951ee032ff31a5, type: 3}
+  - {fileID: 21300000, guid: 058c624529aab2e47bf8a36491e2f299, type: 3}
 --- !u!1001 &288705401
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1839,7 +1839,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0000
+  m_text: 00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1866,8 +1866,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 600
-  m_fontSizeBase: 600
+  m_fontSize: 950
+  m_fontSizeBase: 950
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1932,7 +1932,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.1352, y: 114}
+  m_AnchoredPosition: {x: -2.1352, y: 318.21}
   m_SizeDelta: {x: 1776.7704, y: 636.43}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1218648306

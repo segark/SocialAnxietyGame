@@ -43,4 +43,14 @@ public class RestartLevel : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+
+    public void LoadAbout()
+    {
+        SceneManager.LoadScene("About");
+    }
 }
